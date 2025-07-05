@@ -26,3 +26,27 @@ Backend (PHP + MySQL):
     JWT (JSON Web Token) (opcional): Para autenticação do usuário via tokens
 
     Composer: Para gerenciar dependências do PHP, caso utilize algum framework ou biblioteca
+
+    _____________________________
+
+    ### Frontend (React)
+- `public/`: Arquivos públicos (favicon, index.html)
+- `src/`: Código fonte do React
+  - `components/`: Componentes reutilizáveis (Header, Footer, ProductCard)
+  - `pages/`: Páginas principais (Home, Login, Produto, Carrinho)
+  - `services/`: Funções de API (Axios para chamar a API PHP)
+  - `context/`: Context API para gerenciar estado global (ex: carrinho de compras)
+  - `App.jsx`: Componente principal
+  - `index.js`: Ponto de entrada da aplicação React
+
+
+  ### Backend (PHP + MySQL)
+- `api/`: Endpoints da API
+  - `products.php`: Endpoint para manipular produtos
+  - `orders.php`: Endpoint para pedidos
+  - `users.php`: Endpoint para usuários
+- `config/`: Configurações do banco de dados
+  - `db.php`: Conexão com MySQL
+- `.htaccess`: Regras de reescrita (caso esteja usando Apache)
+- `index.php`: Ponto de entrada da API
+- `composer.json`: Dependências do PHP

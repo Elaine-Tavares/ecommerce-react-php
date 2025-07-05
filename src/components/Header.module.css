@@ -1,0 +1,112 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 5rem;
+  background-color:#c9a0f5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+.logo {
+  height: 80px;
+  width: auto;
+}
+
+.mobile_menu{
+    display: none;
+}
+
+/* Container dos links */
+.nav_links {
+  display: flex;
+  gap: 50px;
+  transition: 0.3s;
+}
+
+.link {
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  transition: 0.3s ease;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-bottom: 3px solid transparent;
+}
+
+
+.link:hover {
+   border-bottom: 3px solid black;
+}
+
+.mobileMenu{
+    display: none;
+}
+
+.mobile_close{
+    display: none;
+}
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: center; 
+    gap: 10rem;
+    
+}
+
+  .nav_links {
+    position: fixed;
+    width: 230px;
+    top: -1200px;
+    height: 100%;
+    right: 0;
+    flex-flow: column;
+    padding: 2.8rem 2rem;
+    text-align: center;
+    background-color:#c9a0f5; 
+    transition: .5s ease;
+    gap: 80px;
+  }
+
+.mobile_menu{
+    display: flex;
+}
+
+.overlay{
+    position: fixed;
+    width: 100%;
+    top: -1200px;
+    height: 100%;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8); 
+    cursor: pointer;
+    transition: .5s ease !important;
+    z-index: 0;
+    }
+
+.mobile_close{
+    display: flex;
+    text-align: end;
+    cursor: pointer;
+    align-self: center;
+    font-size: 30px;
+}
+
+.btn_mobile{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.open{
+    /* display: flex; */
+    top: 0px;    
+}
+
+}
