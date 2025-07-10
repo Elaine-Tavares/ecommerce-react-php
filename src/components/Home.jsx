@@ -1,7 +1,13 @@
-import React from 'react'
+import Container from './Container'
+
 
 export default function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <Container>
+        Home
+        <h2>Você está logado</h2>
+      </Container>
+    </div>
   )
 }

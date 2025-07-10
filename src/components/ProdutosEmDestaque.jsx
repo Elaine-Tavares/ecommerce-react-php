@@ -1,7 +1,12 @@
-import React from 'react'
+import Container from './Container'
+
 
 export default function ProdutosEmDestaque() {
   return (
-    <div>ProdutosEmDestaque</div>
+    <div>
+      <Container>
+        ProdutosEmDestaque
+      </Container>
+    </div>
   )
 }

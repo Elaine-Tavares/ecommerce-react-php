@@ -1,0 +1,39 @@
+.search_bar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #a9d7f5;
+    padding: 5px;
+    gap: 5px;
+}
+
+.search_bar input{
+    padding: 10px 0px 10px 5px;
+    width: 500px;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    border-radius: 8px;
+}
+
+.container_lupa{
+    width: 50px;
+    height: auto;
+    padding: 8.5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;  
+    border-radius: 8px;
+    transition: 0.5s ease;
+}
+
+.container_lupa:hover{
+    background-color: white !important;
+}
+
+.lupa{
+    font-size: 25px;
+    color: gray;
+}

@@ -50,3 +50,8 @@ Backend (PHP + MySQL):
 - `.htaccess`: Regras de reescrita (caso esteja usando Apache)
 - `index.php`: Ponto de entrada da API
 - `composer.json`: Dependências do PHP
+
+
+FERRAMENTAS UTILIZADAS: 
+PHPMailer: Para gestão do envio de e-mails de confirmação
+

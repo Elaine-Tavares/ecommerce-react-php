@@ -1,7 +1,13 @@
-import React from 'react'
+
+import Container from './Container'
+
 
 export default function VantagensDaLoja() {
   return (
-    <div>VantagensDaLoja</div>
+    <div>
+      <Container>
+        VantagensDaLoja
+      </Container>
+    </div>
   )
 }
