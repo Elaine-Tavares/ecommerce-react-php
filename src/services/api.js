@@ -12,9 +12,9 @@ import axios from "axios";
 // Em src/services/api.js
 const api = axios.create({
   baseURL: "https://cors-anywhere.herokuapp.com/https://elaines-charm.infinityfreeapp.com",
-  headers: {
-    "Content-Type": "application/json"
-  }
+  // headers: {
+  //   "Content-Type": "application/json"
+  // }
 });
 
 export default api;
