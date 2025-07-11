@@ -6,13 +6,18 @@ import { useState } from 'react'
 
 
 export default function Entrar() {
-  const navigate = useNavigate()
+  /*Ao ler um componente, um desenvolvedor espera encontrar:
+    1 - Primeiro: os estados (useState)
+    2 - Depois: os efeitos colaterais (useEffect)
+    3 - Em seguida: as funções internas
+    4 - Por fim: o retorno do JSX*/
 
+  const navigate = useNavigate()
   // Estados para armazenar e-mail, senha e mensagem de erro ou sucesso.
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagemErr, setMensagemErr] = useState('');
-  
+ 
   const handleLogar = async (e) => {
     e.preventDefault();
     // Leva a janela ao topo do formulário
@@ -27,6 +32,11 @@ export default function Entrar() {
       
       // Verifica se o login foi bem-sucedido com base na resposta da API
       if (response.data.success) {
+         // ✅ Aqui salvamos no localStorage
+        localStorage.setItem('usuarioLogado', 'true')
+        // console.log(localStorage)    
+        console.log('Após login:', localStorage.getItem('usuarioLogado')) // Deve dar null
+ 
         // Navega para a página inicial ou qualquer outra página após login bem-sucedido
         navigate('/'); // Substitua '/home' pela rota para a página de destino após login.
       } else {

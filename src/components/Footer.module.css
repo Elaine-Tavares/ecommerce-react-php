@@ -1,0 +1,33 @@
+.footer {
+  background-color:#c9a0f5;
+  text-align: center;
+  padding: 20px;
+  /* position: fixed; */
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+
+.footer p a {
+  text-decoration: none;
+  transition: 0.3s ease;
+  color: blue;
+  border-bottom: 2px solid transparent;
+  
+}
+
+.footer p a:hover {
+  border-bottom: 2px solid blue;
+}
+
+.icone_linkedin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icone_linkedin a{
+  font-size: 30px;
+}

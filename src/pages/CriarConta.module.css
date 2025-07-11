@@ -19,15 +19,13 @@
     text-decoration: none;
 }
 
-
 .logo {
   height: 80px;
-  width: auto;
+  width: 80px !important;
   border-radius: 50%;
 }
 
-
-.form_entrar_conta {
+.form_criar_conta {
   max-width: 500px;
   margin: 30px auto;
   padding: 30px;
@@ -36,7 +34,7 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-.form_entrar_conta h2 {
+.form_criar_conta h2 {
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
@@ -54,7 +52,9 @@
   font-weight: 600;
 }
 
+.div_form input[type="email"],
 .div_form input[type="text"],
+.div_form input[type="tel"],
 .div_form input[type="password"] {
   padding: 12px;
   border: 1px solid #ccc;
@@ -77,21 +77,50 @@
   background-color: #5b21b6;
 }
 
-.botaoCriarContaSecundario {
-  background: transparent;
-  border: 2px solid #b872d8;
-  color: #b872d8;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: all 0.3s ease;
+/* Responsivo */
+@media (max-width: 768px) {
+  .form_criar_conta {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .logo {
+    width: 45px;
+  }
+
+  .form_criar_conta h2 {
+    font-size: 20px;
+  }
+
+  .div_form input[type="email"],
+  .div_form input[type="text"],
+  .div_form input[type="phone"],
+  .div_form input[type="password"] {
+    font-size: 14px;
+  }
 }
 
-.botaoCriarContaSecundario:hover {
-  background: #b872d8;
-  color: white;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mensagemSucesso {
+  text-align: center;
+  color: black;
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  animation: fadeIn 0.6s ease forwards;
 }
 
 .mensagemErr {
@@ -106,25 +135,40 @@
   animation: fadeIn 0.6s ease forwards;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-  .form_entrar_conta {
-    margin: 20px;
-    padding: 20px;
-  }
+.botaoLogar {
+  background-color: #b872d8; /* lilás médio */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px auto;
+  display: block;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-  .logo {
-    width: 45px;
-  }
+.botaoLogar:hover {
+  background-color: #9b5ab8; /* lilás escuro */
+  transform: scale(1.05);
+}
 
-  .form_entrar_conta h2 {
-    font-size: 20px;
-  }
+.botaoLogarSecundario {
+  background: transparent;
+  border: 2px solid #b872d8;
+  color: #b872d8;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
 
-  .div_form input[type="email"],
-  .div_form input[type="password"] {
-    font-size: 14px;
-  }
+.botaoLogarSecundario:hover {
+  background: #b872d8;
+  color: white;
 }
 
 @media (max-width: 480px) {
@@ -133,11 +177,11 @@
     gap: 4px;
   }
 
-  .form_entrar_conta {
+  .form_criar_conta {
     padding: 16px;
   }
 
-  .form_entrar_conta h2 {
+  .form_criar_conta h2 {
     font-size: 18px;
   }
 }

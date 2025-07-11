@@ -1,13 +1,19 @@
 import Header from './Header'
-import Footer from './Footer'
 import styles from './Container.module.css'
 import SearchBar from './SearchBar'
+import Footer from './Footer'
 
-export default function Container() {
+export default function Container({children}) {
+    /*Ao ler um componente, um desenvolvedor espera encontrar:
+    1 - Primeiro: os estados (useState)
+    2 - Depois: os efeitos colaterais (useEffect)
+    3 - Em seguida: as funções internas
+    4 - Por fim: o retorno do JSX*/
   return (
     <div className={styles.container}>
         <Header/>
-        <SearchBar placeholder="Buscar..." color="#c9a0f5"/>
+        <SearchBar placeholder="Buscar..." color="#c9a0f5"/>  
+        {children}
         <Footer/>
     </div>
   )

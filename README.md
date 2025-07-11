@@ -55,3 +55,26 @@ Backend (PHP + MySQL):
 FERRAMENTAS UTILIZADAS: 
 PHPMailer: Para gestão do envio de e-mails de confirmação
 
+
+
+-----------------------------ORIENTAÇÕES PARA O DESENVOLVEDOR--------------------------------------
+📁 Estrutura de pastas recomendada para projetos React
+/src
+│
+├── /assets          → imagens, ícones, fontes
+├── /components      → botões, navbar, footer, formulários reutilizáveis
+├── /pages           → cada rota do app (ex: Home, Entrar, CriarConta, Produtos...)
+├── /services        → chamadas de API (ex: api.js)
+├── /hooks           → custom hooks, se usar
+├── /context         → arquivos de contexto global (ex: AuthContext)
+├── /styles          → se você tiver CSS global ou variáveis
+├── App.jsx
+└── main.jsx
+
+
+ /*Ao ler um componente, um desenvolvedor espera encontrar:
+    1 - Primeiro: os estados (useState)
+    2 - Depois: os efeitos colaterais (useEffect)
+    3 - Em seguida: as funções internas
+    4 - Por fim: o retorno do JSX*/
+

@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom"
-import Header from "./Header"
-import Footer from "./Footer"
+import Header from "../components/Header"
+import Footer from "../components/Footer"
 import styles from './PoliticaDePrivacidade.module.css'
 
 export default function Privacidade() {
+  /*Ao ler um componente, um desenvolvedor espera encontrar:
+    1 - Primeiro: os estados (useState)
+    2 - Depois: os efeitos colaterais (useEffect)
+    3 - Em seguida: as funções internas
+    4 - Por fim: o retorno do JSX*/
   return (
     <div>
         <Header/>

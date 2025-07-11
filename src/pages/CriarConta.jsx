@@ -6,22 +6,39 @@ import api from '../services/api'
 
 
 export default function CriarConta() {
-  const [email, setEmail] = useState('')
-  const [nome, setNome] = useState('')
-  const [telefone, setTelefone] = useState('')
-  const [senha, setSenha] = useState('')
-  const [repeteSenha, setRepeteSenha] = useState('')
-  const [mensagem, setMensagem] = useState('')
-  const [mensagemErr, setMensagemErr] = useState('')
-  const [aceitouTermos, setAceitouTermos] = useState(false)
-  const location = useLocation()
-  const navigate = useNavigate()
+    /*Ao ler um componente, um desenvolvedor espera encontrar:
+    1 - Primeiro: os estados (useState)
+    2 - Depois: os efeitos colaterais (useEffect)
+    3 - Em seguida: as funções internas
+    4 - Por fim: o retorno do JSX*/
+    const [email, setEmail] = useState('')
+    const [nome, setNome] = useState('')
+    const [telefone, setTelefone] = useState('')
+    const [senha, setSenha] = useState('')
+    const [repeteSenha, setRepeteSenha] = useState('')
+    const [mensagem, setMensagem] = useState('')
+    const [mensagemErr, setMensagemErr] = useState('')
+    const [aceitouTermos, setAceitouTermos] = useState(false)
+    const location = useLocation()
+    const navigate = useNavigate()
+    const [ativado, setAtivado] = useState(false)
+
+    useEffect(() => {
+      const params = new URLSearchParams(location.search)
+      if (params.get('sucesso') === '1') {
+        setMensagem('Conta ativada com sucesso! Clique no botão abaixo para logar.')
+        setAtivado(true) // ← agora o estado foi alterado
+
+        // Limpa a mensagem depois de 5 segundos (opcional)
+        setTimeout(() => setMensagem(''), 5000)
+      }
+    }, [location])
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    // leva a janela ao topo do formulário
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+      // leva a janela ao topo do formulário
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
     try {
       const response = await api.post('/dimitri_criar_conta.php', {
@@ -44,6 +61,11 @@ export default function CriarConta() {
         setSenha('')
         setRepeteSenha('') 
         setAceitouTermos(false)
+
+          // apaga a mensagem de erro após 3s
+          setTimeout(() => {
+          setMensagem("") 
+        }, 5000);
         return;
       
         } else {
@@ -64,18 +86,6 @@ export default function CriarConta() {
       return;
     } 
   }
-
-  const [ativado, setAtivado] = useState(false)
-  useEffect(() => {
-    const params = new URLSearchParams(location.search)
-    if (params.get('sucesso') === '1') {
-      setMensagem('Conta ativada com sucesso! Clique no botão abaixo para logar.')
-      setAtivado(true) // ← agora o estado foi alterado
-
-      // Limpa a mensagem depois de 5 segundos (opcional)
-      setTimeout(() => setMensagem(''), 5000)
-    }
-  }, [location])
 
   return (
     <div>

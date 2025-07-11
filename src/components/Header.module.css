@@ -46,8 +46,14 @@ h3{
   transition: 0.3s;
 }
 
-.link,
-.link_entrar {
+.link_home,
+.link_entrar,
+.link_sair,
+.link_meuCarrinho,
+.link_produtos,
+.link_vantagens,
+.link_minhaConta,
+.link_criarConta {
   font-weight: 500;
   color: #333;
   text-decoration: none;
@@ -57,8 +63,19 @@ h3{
   border-bottom: 3px solid transparent;
 }
 
-.link:hover {
+.link_home:hover,
+.link_entrar:hover,
+.link_sair:hover,
+.link_meuCarrinho:hover,
+.link_produtos:hover,
+.link_vantagens:hover,
+.link_minhaConta:hover,
+.link_criarConta:hover{
    border-bottom: 3px solid black;
+}
+
+.active {
+  border-bottom: 3px solid black;
 }
 
 .link_entrar {
@@ -68,15 +85,6 @@ h3{
   gap: 3px;
 }
 
-.link_entrar:hover {
-   border-bottom: 3px solid black;
-}
-
-.active {
-  border-bottom: 3px solid black;
-}
-
-
 .mobileMenu{
     display: none;
 }
@@ -84,7 +92,6 @@ h3{
 .hide{
   display: none;
 }
-
 
 
 /* Responsividade */
