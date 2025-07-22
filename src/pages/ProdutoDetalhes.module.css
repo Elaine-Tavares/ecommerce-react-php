@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.imagens {
+  flex: 1 1 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imagemPrincipal {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.info {
+  flex: 1 1 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.valor_do_produto {
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #e6007e;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+}
+
+.botaoAddCarrinho {
+  background-color: green;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* width: fit-content; */
+  width: 250px;
+}
+
+.botaoAddCarrinho:hover {
+  background-color: rgb(2, 108, 2);
+}
+
+.botaoIrCarrinho {
+  background-color: #e91e63;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* width: fit-content; */
+   width: 250px;
+}
+
+.botaoIrCarrinho:hover {
+  background-color: #c2185b;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .imagemPrincipal {
+    max-width: 100%;
+  }
+
+  .info h1 {
+    font-size: 1.5rem;
+  }
+
+  .valor_do_produto {
+    font-size: 1.2rem;
+  }
+
+  .botaoCompra {
+    width: 100%;
+    text-align: center;
+  }
+}

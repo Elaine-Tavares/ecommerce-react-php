@@ -52,9 +52,10 @@ Backend (PHP + MySQL):
 - `composer.json`: Dependências do PHP
 
 
-FERRAMENTAS UTILIZADAS: 
-PHPMailer: Para gestão do envio de e-mails de confirmação
-
+### 🛠️ Ferramentas Utilizadas
+- **PHPMailer**: Para envio de e-mails de confirmação de conta via SMTP.
+<!-- - **Debounce (função personalizada)**: Utilizada para otimizar o desempenho da busca de produtos, evitando múltiplas requisições seguidas. -->
+- **React Toastify**: Para exibição de notificações elegantes (sucesso, erro, avisos).
 
 
 -----------------------------ORIENTAÇÕES PARA O DESENVOLVEDOR--------------------------------------
