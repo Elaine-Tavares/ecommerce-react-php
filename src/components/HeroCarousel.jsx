@@ -6,44 +6,33 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import styles from './HeroCarousel.module.css'
 
-import api from '../services/api'
+// import api from '../services/api'
 
 import hero_img1 from '../assets/hero_img1.png'
+import hero_img2 from '../assets/hero_img2.png'
+import hero_img3 from '../assets/hero_img3.jpg'
+import hero_img4 from '../assets/hero_img4.jpg'
+import hero_img5 from '../assets/hero_img5.jpg'
+import hero_kit_cuidados from '../assets/hero_kit_cuidados.jpg'
+import hero_maquiagem from '../assets/hero_maquiagem.jpg'
 
 import { useEffect, useState } from 'react'
 
 export default function HeroCarousel() {
   const [imgs, setImgs] = useState([])
-  const [msg, setMsg] = useState()
 
-
-  const searchImgs = async () => {
-      try {
-        const response = await api.get('/hero_carousel.php'); {
-          if(response.data.status === 'sucesso'){
-            setImgs(response.data.dados);
-            console.log(msg)
-            // console.log("STATUS", response.data.status)
-            // console.log("Imagens carregadas:", response.data.dados);
-          }
-        }
-         
-      } catch (error) {
-        console.error("Erro:", error);
-        setMsg("Erro ao conectar com o servidor.")
-        return;
-      }
-  };
+  
+  
+  const searchImgs = () =>{   
+    setImgs(objetos)
+  }
 
   useEffect(() => {
-    searchImgs()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  
-
+    searchImgs() 
+  },)
 
   return (
-    <div className={styles.swiperContainer}>
+    <div className={styles.swiperContainer} >
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -53,11 +42,16 @@ export default function HeroCarousel() {
         className={styles.mySwiper}
       >  
         <SwiperSlide className={styles.banner_principal}>
-          <img src={hero_img1}alt="Banner 2" />  
+          <img src={hero_img1}alt="Banner" />  
           <h2>Descubra o charme que há em você!</h2>
         </SwiperSlide> 
         {imgs.map((img) => 
-        <SwiperSlide key={img.id}><img src={`http://localhost/elaines_charm_backend/images/${img.imagem}`}alt="Banner 2" /></SwiperSlide>  
+        <SwiperSlide 
+          key={img.id}>
+          <img src={img.imagem} 
+          alt="Banner" 
+        />
+        </SwiperSlide>  
        )}
       </Swiper>
     </div>

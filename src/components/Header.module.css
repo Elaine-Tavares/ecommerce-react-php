@@ -10,6 +10,18 @@
   top: 0;
   right: 0;
   z-index: 998;
+  animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+  /*No início 0%: o elemento está totalmente transparente*/
+  0% {
+    opacity: 0;
+  }
+  /*No fim 100%: o elemento está totalmente visível*/
+  100% {
+    opacity: 1;
+  }
 }
 
 
