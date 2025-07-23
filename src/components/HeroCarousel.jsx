@@ -21,7 +21,32 @@ import { useEffect, useState } from 'react'
 export default function HeroCarousel() {
   const [imgs, setImgs] = useState([])
 
-  
+  const objetos = [
+    {
+      id: "1",
+      imagem: `${hero_img2}`
+    },
+    {
+      id: "3",
+      imagem: `${hero_img3}`
+    },
+    {
+      id: "4",
+      imagem: `${hero_img4}`
+    },
+    {
+      id: "4",
+      imagem: `${hero_img5}`
+    },
+     {
+      id: "6",
+      imagem: `${hero_kit_cuidados}`
+    },
+    {
+      id: "7",
+      imagem: `${hero_maquiagem}`
+    }
+  ]
   
   const searchImgs = () =>{   
     setImgs(objetos)
