@@ -42,6 +42,7 @@ export default function Home() {
       if (response.status) {
         //exibe a mensagem de sucesso
         setImgs(response.data.dados)
+        console.log("DADOS", response.data.dados)
         return;
       
         } else {
@@ -70,10 +71,16 @@ export default function Home() {
       inputDoUsuario={valorDoUsuario}
       setInputDoUsuario={(e) => setValorDoUsuario(e.target.value)}
     />
-     {mensagem}
+    
+
         {ativado && (
-          <button className={styles.botaoLogar} onClick={() => navigate('/entrar')}>Logar</button>
-        )}
+  <div className={styles.mensagemAtivacao}>
+    <p >{mensagem}</p>
+    <button className={styles.botaoLogar} onClick={() => navigate('/entrar')}>
+      Logar
+    </button>
+  </div>
+)}
     {valorDoUsuario && (
       <div className={styles.produtosContainer}>
         <h1 className={styles.titulo}>Nossos Produtos</h1>
