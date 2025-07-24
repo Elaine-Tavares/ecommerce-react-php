@@ -1,8 +1,8 @@
 import styles from './Entrar.module.css'
 import logo from '../assets/logo.webp'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import api from '../services/api'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 export default function Entrar() {
@@ -17,6 +17,22 @@ export default function Entrar() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagemErr, setMensagemErr] = useState('');
+  const [ativado, setAtivado] = useState(false)
+  const [mensagem, setMensagem] = useState("")
+  const location = useLocation()
+
+
+  
+    useEffect(() => {
+      const params = new URLSearchParams(location.search)
+      if (params.get('sucesso') === '1') {
+        setMensagem('Conta ativada com sucesso! Clique no botão abaixo para logar.')
+        setAtivado(true) // ← agora o estado foi alterado
+
+        // Limpa a mensagem depois de 5 segundos (opcional)
+        setTimeout(() => setMensagem(''), 5000)
+      }
+    }, [location])
  
   const handleLogar = async (e) => {
     e.preventDefault();
@@ -70,6 +86,10 @@ export default function Entrar() {
        </Link>
       </div>
       <div className={styles.form_entrar_conta}>
+        {mensagem}
+        {ativado && (
+          <button className={styles.botaoLogar} onClick={() => navigate('/entrar')}>Logar</button>
+        )}
         <h2>Preencha os dados para logar</h2>
         
          {mensagemErr && <p className={styles.mensagemErr}>{mensagemErr}</p> }

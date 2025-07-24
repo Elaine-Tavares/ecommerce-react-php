@@ -1,7 +1,7 @@
 import styles from './CriarConta.module.css'
 import logo from '../../src/assets/logo.webp'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import api from '../services/api'
 
 
@@ -19,25 +19,14 @@ export default function CriarConta() {
     const [mensagem, setMensagem] = useState('')
     const [mensagemErr, setMensagemErr] = useState('')
     const [aceitouTermos, setAceitouTermos] = useState(false)
-    const location = useLocation()
+
     const navigate = useNavigate()
-    const [ativado, setAtivado] = useState(false)
+ 
     const [processando, setProcessando] = useState("")
-
-    useEffect(() => {
-      const params = new URLSearchParams(location.search)
-      if (params.get('sucesso') === '1') {
-        setMensagem('Conta ativada com sucesso! Clique no botão abaixo para logar.')
-        setAtivado(true) // ← agora o estado foi alterado
-
-        // Limpa a mensagem depois de 5 segundos (opcional)
-        setTimeout(() => setMensagem(''), 5000)
-      }
-    }, [location])
-
 
     const handleSubmit = async (e) => {
       e.preventDefault()
+      console.log("Acontece algo 1")
       setProcessando("Processando...")
       // leva a janela ao topo do formulário
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -50,12 +39,14 @@ export default function CriarConta() {
         repeteSenha,
         aceitouTermos
       })
+       console.log("Acontece algo 2")
       // sucesso 
       if (response.data.success) {
         //exibe a mensagem de sucesso
         setMensagem(response.data.message) 
         setProcessando("")
-      
+        console.log("Acontece algo 3")
+ 
         //limpa os campos
         setEmail('')
         setNome('')
@@ -71,11 +62,10 @@ export default function CriarConta() {
         return;
       
         } else {
-          // leva a janela ao topo do formulário
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          //exibe a mensagem de erro
           setProcessando("")
           setMensagemErr(response.data.message) 
+          console.log("Acontece algo 4")
+          console.log("RESPOSTA", response.data.message)
           // apaga a mensagem de erro após 3s
           setTimeout(() => {
           setMensagemErr("") 
@@ -107,9 +97,7 @@ export default function CriarConta() {
       {mensagemErr && <p className={styles.mensagemErr}>{mensagemErr}</p> }
 
       {mensagem && <p className={styles.mensagemSucesso}>{mensagem}</p>}
-      {ativado && (
-          <button className={styles.botaoLogar} onClick={() => navigate('/entrar')}>Logar</button>
-        )}
+      
       <form onSubmit={handleSubmit}>
         <div className={styles.div_form}>
          <label>Adicione o seu e-mail</label>
