@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
+import { FaLinkedin } from "react-icons/fa6"
+import { Github, Linkedin, Mail, MessageCircle  } from 'lucide-react';
 import styles from './Footer.module.css'
-import { FaLinkedin } from "react-icons/fa6";
 
 
 export default function Footer() {
+    const anoAtual = new Date().getFullYear();
   /*Ao ler um componente, um desenvolvedor espera encontrar:
     1 - Primeiro: os estados (useState)
     2 - Depois: os efeitos colaterais (useEffect)
@@ -19,15 +21,49 @@ export default function Footer() {
 
 // Redes sociais (se quiser simular ícones de Insta/Facebook)
 
-    <footer className={styles.footer}>
-      <p>Desenvolvido por <strong>Elaine Tavares</strong></p>
-      <div style={{display: "flex", justifyContent: "center"}}>
-          <Link to="/termos">Termos de Uso</Link> &nbsp;&nbsp; e &nbsp;&nbsp;
-          <Link to="/politica">Política de Privacidade</Link>.
-      </div>
-      <p>Email: <a href="mailto:elainetavares.developer@gmail.com">elainetavares.developer@gmailcom</a></p>
-      <p>WhatsApp: <a href="https://wa.me/5521998410746" target="_blank">(21) 99841-0746</a></p>
-      <p className={styles.icone_linkedin}>Linkedin: <a href="https://www.linkedin.com/in/elaine-tavares-b5797b1b0/" target="_blank">{<FaLinkedin/>}</a></p>
+    <footer className={styles.footer}>      
+          <p className={styles.nome}>Desenvolvido com carinho por Elaine Tavares ©{anoAtual}</p>
+          <div className={styles.info}>
+            <div className={styles.info_texto}>
+                <a
+                href="mailto:contato@elainetavaresweb.com" target='blank'  rel="noopener noreferrer"
+                title="Enviar um e-mail para Elaine Tavares"
+                className={styles.email}
+                >
+                <Mail/>
+                contato@elainetavaresweb.com
+              </a>
+              <p className={styles.textofooter}>
+                Desenvolvedora Front-End <br/> HTML | CSS | JavaScript | React | PHP | MySQL | SEO | GitHub
+              </p>
+            </div>
+            <nav className={styles.links} aria-label="Links para redes sociais">
+            <a
+              href="https://github.com/Elaine-Tavares"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Acessar o GitHub de Elaine Tavares"
+            >
+              <Github />
+            </a>
+            <a
+              href="https://linkedin.com/in/elaine-tavares-b5797b1b0"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Acessar o LinkedIn de Elaine Tavares"
+            >
+              <Linkedin />
+            </a>
+            <a
+              href="https://wa.link/b9mkmm"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Enviar um whatsapp para Elaine Tavares"
+            >
+            <MessageCircle />
+            </a>
+          </nav>
+        </div>     
     </footer>
   )
 }

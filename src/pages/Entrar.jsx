@@ -1,5 +1,5 @@
 import styles from './Entrar.module.css'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.webp'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import api from '../services/api'
 import { useState } from 'react'

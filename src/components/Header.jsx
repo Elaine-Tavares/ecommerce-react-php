@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.webp'
 import styles from './Header.module.css'
 import { useNavigate, useLocation  } from 'react-router-dom'
 import { useState } from 'react'
-import btnMobile from '../assets/btn_mobile.png'
+import btnMobile from '../assets/btn_mobile.webp'
 import { FaSignInAlt } from "react-icons/fa";
 import { FaCartArrowDown } from "react-icons/fa6";
 import { useEffect } from 'react'

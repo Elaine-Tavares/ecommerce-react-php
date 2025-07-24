@@ -1,62 +1,60 @@
 import { Link } from 'react-router-dom'
 import Container from '../components/Container'
-import styles from './Home.module.css'
 import HeroCarousel from '../components/HeroCarousel'
-import selo from '../assets/selo.png'
+import selo from '../assets/selo.webp'
 import SearchBar from '../components/SearchBar'
 import { useEffect, useState } from 'react'
-import api from '../services/api'
+import styles from './Home.module.css'
+import api from '../services/api.js'
+
 
 
 export default function Home() {
   /*Ao ler um componente, um desenvolvedor espera encontrar:
     1 - Primeiro: os estados (useState)
     2 - Depois: os efeitos colaterais (useEffect)
-    3 - Em seguida: as funções internas
+    3 - Em seguid_do_produtoa: as funções internas
     4 - Por fim: o retorno do JSX*/
-    const [imgs, setImgs] = useState([])
-    const [msg, setMsg] = useState()
-    const [valorDoUsuario, setValorDoUsuario] = useState('')
-    const [carregando, setCarregando] = useState(false)
-
-    const searchImgs = async () => {
-      try {
-        setCarregando(true)
-        const response = await api.get('/produtos.php'); {
-          if(response.data.status === 'sucesso'){
-            setImgs(response.data.dados);
-            console.log(msg)
-            // console.log("STATUS", response.data.status)
-            // console.log("Imagens carregadas:", response.data.dados);
-          }
-        }   
-      } catch (error) {
-        console.error("Erro:", error);
-        setMsg("Erro ao conectar com o servidor.")
+ 
+     const [imgs, setImgs] = useState([])
+     const [valorDoUsuario, setValorDoUsuario] = useState("")
     
-      } finally {
-      setCarregando(false)
-    }
-  };
+     const searchObjects = async () => {   
+
+    try {
+      const response = await api.get('/elaines_charm_backend/produtos.php')
+      // sucesso 
+      if (response.status) {
+        //exibe a mensagem de sucesso
+        setImgs(response.data.dados)
+        return;
+      
+        } else {
+         console.error("Erro ao carregar imagens", response.status)    
+          return;
+      }
+    } catch (error) {
+      console.error("Erro ao carregar imagens, catch", error)
+      return;
+    } 
+  }
+
+  useEffect(() => {
+    searchObjects()
+  }, [valorDoUsuario])
+  
 
     // Novo array com filtro aplicado
     const produtosFiltrados = imgs.filter((img) =>
      img.nome_do_produto.toLowerCase().includes(valorDoUsuario.toLowerCase())    
   )
-
-  useEffect(() => {
-      searchImgs()
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [] )
-
-    
+  
   return (
     <Container>
     <SearchBar
       inputDoUsuario={valorDoUsuario}
       setInputDoUsuario={(e) => setValorDoUsuario(e.target.value)}
     />
-    {carregando && <div className='loader'></div>}
     {valorDoUsuario && (
       <div className={styles.produtosContainer}>
         <h1 className={styles.titulo}>Nossos Produtos</h1>
@@ -111,8 +109,8 @@ export default function Home() {
       <section className={styles.about}>
         <h2>Sobre a Elaine’s Charm</h2>
         <p>
-          A Elaine’s Charm nasceu do amor pelos cuidados com a pele e a autoestima. 
-          Oferecemos cosméticos de alta qualidade, cruelty-free e com preços justos.
+          A Elaine’s Charm nasceu do amor pelos cuid_do_produtoados com a pele e a autoestima. 
+          Oferecemos cosméticos de alta qualid_do_produtoade, cruelty-free e com preços justos.
         </p>
       </section>
 
@@ -122,7 +120,7 @@ export default function Home() {
         <div className={styles.cardsContainer}>
           {imgs.slice(0, 3).map((img) => 
             <div className={styles.card}>
-            <img src={img.imagem_do_produto} alt="Produto 1" />
+            <img src={img.imagem_do_produto} alt="Produto" />
             <h4>{img.nome_do_produto}</h4>
             <Link  to={`/produto_detalhes/${img.id_do_produto}`} className={styles.cardLink}><button className={styles.botaoVer}>Ver Produto</button></Link>
           </div>
@@ -136,13 +134,13 @@ export default function Home() {
           alt="Produto Cruelty-Free"
           className={styles.crueltyIcon}
         />
-        <p>Produtos livres de crueldade animal. Amor à beleza e à vida. 🐇</p>
+        <p>Produtos livres de crueldade animal. Amor à beleza e à vid_do_produtoa. 🐇</p>
       </section>
 
       {/* Chamada para criar conta */}
       <section className={styles.cta}>
         <h2>💌 Quer ofertas exclusivas?</h2>
-        <p>Crie sua conta grátis e receba novidades direto no seu e-mail</p>
+        <p>Crie sua conta grátis e receba novid_do_produtoades direto no seu e-mail</p>
         <div className={styles.ctaButtons}>
           <Link to="/criarConta" className={styles.btnPrimary}>Criar Conta</Link>
           <Link to="/entrar" className={styles.btnSecondary}>Entrar</Link>

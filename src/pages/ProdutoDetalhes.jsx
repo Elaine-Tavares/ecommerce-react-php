@@ -1,19 +1,47 @@
 // Importa o hook que permite acessar os parâmetros da URL (ex: o ID do produto)
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import api from '../services/api'
-import styles from './ProdutoDetalhes.module.css'
+
 import Container from '../components/Container'
 import { toast } from 'react-toastify' // ✅ IMPORTAR AQUI
+import styles from './ProdutoDetalhes.module.css'
+import api from '../services/api.js'
 
 export default function ProdutoDetalhes() {
   // Obtém o ID do produto que está vindo da URL (ex: /produto/7)
   const { id } = useParams()
   // Estado que vai guardar os dados do produto buscado
-  const [produto, setProduto] = useState(null)
   const [carrinho, setCarrinho] = useState([])
   const navigate = useNavigate()
+  const [carrProduto, setCarrProduto] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [objetos, setObjetos] = useState([])
 
+    const carregarCarousel = async () => {   
+      setLoading(true)
+    try {
+      const response = await api.get('/produto_detalhes.php')
+      // sucesso 
+      if (response.data.success) {
+        //exibe a mensagem de sucesso
+        setObjetos(response.data.message)
+        setLoading(false)
+        return;
+      
+        } else {
+         console("Erro ao carregar imagens", response.data.message)    
+          return;
+      }
+    } catch (error) {
+      console.error("Erro ao carregar imagens, catch", error)
+      return;
+    } 
+  }
+
+
+  useEffect(() => {
+    carregarCarousel()
+  }, [])
 
   function addProdutoCarrinho(novoProduto) {
   console.log("novo produto:", novoProduto)
@@ -54,42 +82,33 @@ export default function ProdutoDetalhes() {
   // console.log("Carrinho com novo produto:", carrinho)
 }
 
-  // useEffect é executado quando o componente é montado
-  // e também se o 'id' mudar (por segurança)
   useEffect(() => {
-    // Função assíncrona para buscar o produto no backend  
-    const carregarProduto = async () => {
-      try {   
-        // Faz uma requisição GET para buscar os dados do produto com base no ID
-        const response = await api.get(`/produto_detalhes.php?id_do_produto=${id}`)
-        // Salva os dados recebidos no estado 'produto'
-        setProduto(response.data.dados)// pega apenas os dados do produto
-         
-      } catch (erro) {
-        // Se algo der errado, exibe o erro no console
-        console.error('Erro ao carregar produto:', erro)
-      }
+    const produtoEncontrado = objetos.find(p => p.id_do_produto === id)
+    if (produtoEncontrado) {
+      setCarrProduto(produtoEncontrado)
+    } else {
+      toast.error('Produto não encontrado 😥')
+      navigate('/') // ou redirecione para uma página de erro
     }
-    // Chama a função de carregamento do produto
-    carregarProduto()
-  }, [id])// Executa o useEffect novamente se o 'id' mudar
+  }, [id, navigate])
 
   // Se ainda não carregou o produto, exibe uma mensagem temporária
-  if (!produto) return <p>Carregando produto...</p>
+  if (!carrProduto) return <p>Carregando produto...</p>
 
   return (
     <Container>
+      {loading}
       <div className={styles.container}>
         <div className={styles.imagens}>
-          <img src={produto.imagem_do_produto} alt={produto.nome_do_produto} className={styles.imagemPrincipal} />
+          <img src={carrProduto.imagem_do_produto} alt={carrProduto.imagem_do_produto} className={styles.imagemPrincipal} />
           {/* Se tiver mais imagens, renderize miniaturas aqui */}
         </div>
         <div className={styles.info}>
-          <h1>{produto.nome_do_produto}</h1>
-          <h4>{produto.descricao_do_produto}</h4>
-          <span className={styles.valor_do_produto}>R$ {produto.valor_do_produto}</span> ou
-          <span className={styles.valor_do_produto}>R$ {produto.parcelamento_do_produto}</span>
-          <button onClick={()=>addProdutoCarrinho(produto)} className={styles.botaoAddCarrinho}>Adicionar ao Carrinho</button>
+          <h1>{carrProduto.nome_do_produto}</h1>
+          <h4>{carrProduto.descricao_do_produto}</h4>
+          <span className={styles.valor_do_produto}>R$ {carrProduto.valor_do_produto}</span> ou
+          <span className={styles.valor_do_produto}>R$ {carrProduto.parcelamento_do_produto}</span>
+          <button onClick={()=>addProdutoCarrinho(carrProduto)} className={styles.botaoAddCarrinho}>Adicionar ao Carrinho</button>
           <button onClick={()=>navigate('/meuCarrinho')} className={styles.botaoIrCarrinho}>Ir para o Carrinho</button>
         </div>
       </div>

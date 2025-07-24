@@ -1,7 +1,6 @@
 import Header from './Header'
-import styles from './Container.module.css'
-import SearchBar from './SearchBar'
 import Footer from './Footer'
+import styles from './Container.module.css'
 
 export default function Container({children}) {
     /*Ao ler um componente, um desenvolvedor espera encontrar:
@@ -12,8 +11,7 @@ export default function Container({children}) {
 
   return (
     <div className={styles.container}>
-        <Header/>
-        
+        <Header/> 
         {children}
         <Footer/>
     </div>

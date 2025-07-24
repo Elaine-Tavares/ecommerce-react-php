@@ -2,7 +2,7 @@
 import Container from '../components/Container'
 import SearchBar from '../components/SearchBar'
 import styles from './VantagensDaLoja.module.css'
-import selo from    '../assets/selo.png'
+import selo from    '../assets/selo.webp'
 import { Link } from 'react-router-dom'
 import api from '../services/api'
 import { useEffect, useState } from 'react'

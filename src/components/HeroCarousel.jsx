@@ -4,60 +4,47 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+import hero_img1 from '../assets/hero_banner.1.webp'
+import api from '../services/api.js'
 import styles from './HeroCarousel.module.css'
-
-// import api from '../services/api'
-
-import hero_img1 from '../assets/hero_img1.png'
-import hero_img2 from '../assets/hero_img2.png'
-import hero_img3 from '../assets/hero_img3.jpg'
-import hero_img4 from '../assets/hero_img4.jpg'
-import hero_img5 from '../assets/hero_img5.jpg'
-import hero_kit_cuidados from '../assets/hero_kit_cuidados.jpg'
-import hero_maquiagem from '../assets/hero_maquiagem.jpg'
 
 import { useEffect, useState } from 'react'
 
 export default function HeroCarousel() {
   const [imgs, setImgs] = useState([])
+  const [loading, setLoading] = useState(false)
 
-  const objetos = [
-    {
-      id: "1",
-      imagem: `${hero_img2}`
-    },
-    {
-      id: "3",
-      imagem: `${hero_img3}`
-    },
-    {
-      id: "4",
-      imagem: `${hero_img4}`
-    },
-    {
-      id: "4",
-      imagem: `${hero_img5}`
-    },
-     {
-      id: "6",
-      imagem: `${hero_kit_cuidados}`
-    },
-    {
-      id: "7",
-      imagem: `${hero_maquiagem}`
-    }
-  ]
-  
-  const searchImgs = () =>{   
-    setImgs(objetos)
+  const carregarCarousel = async () => {   
+      setLoading(true)
+    try {
+      const response = await api.get('/elaines_charm_backend/hero_carousel.php')
+      // sucesso 
+      if (response.status) {
+        //exibe a mensagem de sucesso
+        setImgs(response.data.dados)
+        setLoading(false)
+        return;
+      
+        } else {
+          console.error("Erro ao carregar imagens", response.data.status)  
+          return;
+      }
+    } catch (error) {
+      console.error("Erro ao carregar imagens, catch", error)
+      return;
+    } 
   }
 
+
   useEffect(() => {
-    searchImgs() 
-  },)
+    carregarCarousel()
+  }, [])
+  
+  
 
   return (
     <div className={styles.swiperContainer} >
+      {loading}
       <Swiper
         modules={[Autoplay, Navigation, Pagination]}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -73,7 +60,7 @@ export default function HeroCarousel() {
         {imgs.map((img) => 
         <SwiperSlide 
           key={img.id}>
-          <img src={img.imagem} 
+          <img src={img.link_destino} 
           alt="Banner" 
         />
         </SwiperSlide>  

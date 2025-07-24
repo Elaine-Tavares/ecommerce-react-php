@@ -16,38 +16,38 @@ export default function Produtos() {
     const [msg, setMsg] = useState()
     const [valorDoUsuario, setValorDoUsuario] = useState('')
     const [carregando, setCarregando] = useState(false)
-   
-     const searchImgs = async () => { 
-      try {
-        setCarregando(true)
-        const response = await api.get('/produtos.php'); {
-          if(response.data.status === 'sucesso'){
-            setImgs(response.data.dados);
-            console.log(msg)
-            // console.log("STATUS", response.data.status)
-            // console.log("Imagens carregadas:", response.data.dados);
+
+    const searchObjects = async () => {   
+    
+        try {
+          const response = await api.get('/elaines_charm_backend/produtos.php')
+          // sucesso 
+          if (response.status) {
+            //exibe a mensagem de sucesso
+            setImgs(response.data.dados)
+            return;
+          
+            } else {
+             console.error("Erro ao carregar imagens", response.status)    
+              return;
           }
-        }
-         
-      } catch (error) {
-        console.error("Erro:", error);
-        setMsg("Erro ao conectar com o servidor.")
-        
-      } finally {
-      setCarregando(false)
-    }
-  };
+        } catch (error) {
+          console.error("Erro ao carregar imagens, catch", error)
+          return;
+        } 
+      }
+    
+      useEffect(() => {
+        searchObjects()
+      }, [valorDoUsuario])
+      
+    
+        // Novo array com filtro aplicado
+        const produtosFiltrados = imgs.filter((img) =>
+         img.nome_do_produto.toLowerCase().includes(valorDoUsuario.toLowerCase())    
+      )
 
-    // Novo array com filtro aplicado
-   const produtosFiltrados = imgs.filter((img) =>
-     img.nome_do_produto.toLowerCase().includes(valorDoUsuario.toLowerCase())  
-  )
-
-  
-  useEffect(() => {
-    searchImgs()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [] )
+      
 
   return (
       <Container >

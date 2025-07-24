@@ -1,5 +1,5 @@
 import styles from './CriarConta.module.css'
-import logo from '../../src/assets/logo.png'
+import logo from '../../src/assets/logo.webp'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import api from '../services/api'
