@@ -20,7 +20,7 @@ export default function HeroCarousel() {
       const response = await api.get('/elaines_charm_backend/hero_carousel.php')
       // sucesso 
       if (response.status) {
-        //exibe a mensagem de sucesso
+        console.log("STATUS", response.status)
         setImgs(response.data.dados)
         setLoading(false)
         return;

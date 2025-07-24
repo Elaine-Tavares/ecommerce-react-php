@@ -13,18 +13,18 @@ export default function Produtos() {
     3 - Em seguida: as funções internas
     4 - Por fim: o retorno do JSX*/
     const [imgs, setImgs] = useState([])
-    const [msg, setMsg] = useState()
     const [valorDoUsuario, setValorDoUsuario] = useState('')
     const [carregando, setCarregando] = useState(false)
 
     const searchObjects = async () => {   
-    
+        setCarregando(true)
         try {
           const response = await api.get('/elaines_charm_backend/produtos.php')
           // sucesso 
           if (response.status) {
             //exibe a mensagem de sucesso
             setImgs(response.data.dados)
+            setCarregando(false)
             return;
           
             } else {

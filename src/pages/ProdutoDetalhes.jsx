@@ -10,38 +10,49 @@ import api from '../services/api.js'
 export default function ProdutoDetalhes() {
   // Obtém o ID do produto que está vindo da URL (ex: /produto/7)
   const { id } = useParams()
-  // Estado que vai guardar os dados do produto buscado
+   // Estado que vai guardar os dados do produto buscado
+  const [loading, setLoading] = useState(false)
+  const [produto, setProduto] = useState([])
   const [carrinho, setCarrinho] = useState([])
   const navigate = useNavigate()
-  const [carrProduto, setCarrProduto] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [objetos, setObjetos] = useState([])
 
-    const carregarCarousel = async () => {   
+    const produtoDetalhes = async () => {   
       setLoading(true)
     try {
-      const response = await api.get('/produto_detalhes.php')
+      const response = await api.get(`/elaines_charm_backend/produto_detalhes.php?id_do_produto=${id}`)
       // sucesso 
-      if (response.data.success) {
+      if (response.status) {
         //exibe a mensagem de sucesso
-        setObjetos(response.data.message)
+        setProduto(response.data.dados)
+        console.log("RESPOSTA", response.data.dados)
         setLoading(false)
+
+        const produtoEncontrado = produto.find(p => p.id_do_produto === id)
+          if (produtoEncontrado) {
+            setProduto(produtoEncontrado)
+          }
         return;
       
         } else {
-         console("Erro ao carregar imagens", response.data.message)    
+         console.error("Erro ao carregar imagens", response.status) 
+         toast.error('Produto não encontrado 😥')
+      // navigate('/') // ou redirecione para uma página de erro
+    }   
           return;
       }
-    } catch (error) {
+     catch (error) {
       console.error("Erro ao carregar imagens, catch", error)
       return;
     } 
   }
-
-
+  
   useEffect(() => {
-    carregarCarousel()
-  }, [])
+    produtoDetalhes() 
+  }, [id])
+
+  // Se ainda não carregou o produto, exibe uma mensagem temporária
+  if (!produto) return <p>Carregando produto...</p>
+  
 
   function addProdutoCarrinho(novoProduto) {
   console.log("novo produto:", novoProduto)
@@ -82,33 +93,22 @@ export default function ProdutoDetalhes() {
   // console.log("Carrinho com novo produto:", carrinho)
 }
 
-  useEffect(() => {
-    const produtoEncontrado = objetos.find(p => p.id_do_produto === id)
-    if (produtoEncontrado) {
-      setCarrProduto(produtoEncontrado)
-    } else {
-      toast.error('Produto não encontrado 😥')
-      navigate('/') // ou redirecione para uma página de erro
-    }
-  }, [id, navigate])
 
-  // Se ainda não carregou o produto, exibe uma mensagem temporária
-  if (!carrProduto) return <p>Carregando produto...</p>
 
   return (
     <Container>
       {loading}
       <div className={styles.container}>
         <div className={styles.imagens}>
-          <img src={carrProduto.imagem_do_produto} alt={carrProduto.imagem_do_produto} className={styles.imagemPrincipal} />
+          <img src={produto.imagem_do_produto} alt={produto.imagem_do_produto} className={styles.imagemPrincipal} />
           {/* Se tiver mais imagens, renderize miniaturas aqui */}
         </div>
         <div className={styles.info}>
-          <h1>{carrProduto.nome_do_produto}</h1>
-          <h4>{carrProduto.descricao_do_produto}</h4>
-          <span className={styles.valor_do_produto}>R$ {carrProduto.valor_do_produto}</span> ou
-          <span className={styles.valor_do_produto}>R$ {carrProduto.parcelamento_do_produto}</span>
-          <button onClick={()=>addProdutoCarrinho(carrProduto)} className={styles.botaoAddCarrinho}>Adicionar ao Carrinho</button>
+          <h1>{produto.nome_do_produto}</h1>
+          <h4>{produto.descricao_do_produto}</h4>
+          <span className={styles.valor_do_produto}>R$ {produto.valor_do_produto}</span> ou
+          <span className={styles.valor_do_produto}>R$ {produto.parcelamento_do_produto}</span>
+          <button onClick={()=>addProdutoCarrinho(produto)} className={styles.botaoAddCarrinho}>Adicionar ao Carrinho</button>
           <button onClick={()=>navigate('/meuCarrinho')} className={styles.botaoIrCarrinho}>Ir para o Carrinho</button>
         </div>
       </div>

@@ -22,6 +22,7 @@ export default function CriarConta() {
     const location = useLocation()
     const navigate = useNavigate()
     const [ativado, setAtivado] = useState(false)
+    const [processando, setProcessando] = useState("")
 
     useEffect(() => {
       const params = new URLSearchParams(location.search)
@@ -37,11 +38,11 @@ export default function CriarConta() {
 
     const handleSubmit = async (e) => {
       e.preventDefault()
+      setProcessando("Processando...")
       // leva a janela ao topo do formulário
       window.scrollTo({ top: 0, behavior: 'smooth' });
-
     try {
-      const response = await api.post('/dimitri_criar_conta.php', {
+      const response = await api.post('/elaines_charm_backend/dimitri_criar_conta.php', {
         email,
         nome,
         telefone,
@@ -53,6 +54,7 @@ export default function CriarConta() {
       if (response.data.success) {
         //exibe a mensagem de sucesso
         setMensagem(response.data.message) 
+        setProcessando("")
       
         //limpa os campos
         setEmail('')
@@ -72,7 +74,8 @@ export default function CriarConta() {
           // leva a janela ao topo do formulário
           window.scrollTo({ top: 0, behavior: 'smooth' });
           //exibe a mensagem de erro
-         setMensagemErr(response.data.message)
+          setProcessando("")
+          setMensagemErr(response.data.message) 
           // apaga a mensagem de erro após 3s
           setTimeout(() => {
           setMensagemErr("") 
@@ -82,6 +85,7 @@ export default function CriarConta() {
 
     } catch (error) {
       console.error("Erro:", error)
+      setProcessando("")
       setMensagemErr("Erro ao conectar com o servidor.")
       return;
     } 
@@ -97,6 +101,8 @@ export default function CriarConta() {
       </div>
       <div className={styles.form_criar_conta}>
       <h2>Preencha os dados para criar sua conta</h2>
+
+      {processando && <p className={styles.processando}>{processando}</p>}
       
       {mensagemErr && <p className={styles.mensagemErr}>{mensagemErr}</p> }
 

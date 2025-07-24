@@ -25,7 +25,7 @@ export default function Entrar() {
 
     try {
       // Envia os dados para a API para verificar se o usuário existe
-      const response = await api.post('/dimitri_login.php', 
+      const response = await api.post('/elaines_charm_backend/dimitri_login.php', 
         { email, 
           senha 
       });
