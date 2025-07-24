@@ -30,7 +30,7 @@ export default function Home() {
         setAtivado(true) // ← agora o estado foi alterado
 
         // Limpa a mensagem depois de 5 segundos (opcional)
-        setTimeout(() => setMensagem(''), 5000)
+        // setTimeout(() => setMensagem(''), 5000)
       }
     }, [location])
     

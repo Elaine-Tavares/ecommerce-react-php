@@ -141,7 +141,7 @@ export default function CriarConta() {
          />
         </div>
 
-        <div className={styles.div_form}>
+        <div className={styles.div_form_check}>
           <label>
             <input
               type="checkbox"
