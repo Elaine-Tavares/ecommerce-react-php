@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Container from '../components/Container'
 import HeroCarousel from '../components/HeroCarousel'
 import selo from '../assets/selo.webp'
@@ -18,6 +18,21 @@ export default function Home() {
  
      const [imgs, setImgs] = useState([])
      const [valorDoUsuario, setValorDoUsuario] = useState("")
+       const [ativado, setAtivado] = useState(false)
+  const [mensagem, setMensagem] = useState("")
+  const location = useLocation()
+    const navigate = useNavigate()
+
+      useEffect(() => {
+      const params = new URLSearchParams(location.search)
+      if (params.get('sucesso') === '1') {
+        setMensagem('Conta ativada com sucesso! Clique no botão abaixo para logar.')
+        setAtivado(true) // ← agora o estado foi alterado
+
+        // Limpa a mensagem depois de 5 segundos (opcional)
+        setTimeout(() => setMensagem(''), 5000)
+      }
+    }, [location])
     
      const searchObjects = async () => {   
 
@@ -55,6 +70,10 @@ export default function Home() {
       inputDoUsuario={valorDoUsuario}
       setInputDoUsuario={(e) => setValorDoUsuario(e.target.value)}
     />
+     {mensagem}
+        {ativado && (
+          <button className={styles.botaoLogar} onClick={() => navigate('/entrar')}>Logar</button>
+        )}
     {valorDoUsuario && (
       <div className={styles.produtosContainer}>
         <h1 className={styles.titulo}>Nossos Produtos</h1>
