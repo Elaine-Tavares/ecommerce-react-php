@@ -16,15 +16,17 @@ export default function Home() {
     3 - Em seguid_do_produtoa: as funções internas
     4 - Por fim: o retorno do JSX*/
  
-     const [imgs, setImgs] = useState([])
-     const [valorDoUsuario, setValorDoUsuario] = useState("")
-       const [ativado, setAtivado] = useState(false)
-  const [mensagem, setMensagem] = useState("")
-  const location = useLocation()
+    const [imgs, setImgs] = useState([])
+    const [valorDoUsuario, setValorDoUsuario] = useState("")
+    const [ativado, setAtivado] = useState(false)
+    const [mensagem, setMensagem] = useState("")
+    const location = useLocation()
     const navigate = useNavigate()
+
 
       useEffect(() => {
       const params = new URLSearchParams(location.search)
+          console.log("PARAMS", params)
       if (params.get('sucesso') === '1') {
         setMensagem('Conta ativada com sucesso! Clique no botão abaixo para logar.')
         setAtivado(true) // ← agora o estado foi alterado
@@ -67,13 +69,7 @@ export default function Home() {
   
   return (
     <Container>
-    <SearchBar
-      inputDoUsuario={valorDoUsuario}
-      setInputDoUsuario={(e) => setValorDoUsuario(e.target.value)}
-    />
-    
-
-        {ativado && (
+              {ativado && (
   <div className={styles.mensagemAtivacao}>
     <p >{mensagem}</p>
     <button className={styles.botaoLogar} onClick={() => navigate('/entrar')}>
@@ -81,6 +77,11 @@ export default function Home() {
     </button>
   </div>
 )}
+    <SearchBar
+      inputDoUsuario={valorDoUsuario}
+      setInputDoUsuario={(e) => setValorDoUsuario(e.target.value)}
+    />
+    
     {valorDoUsuario && (
       <div className={styles.produtosContainer}>
         <h1 className={styles.titulo}>Nossos Produtos</h1>
