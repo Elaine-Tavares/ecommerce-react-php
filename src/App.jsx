@@ -16,7 +16,8 @@ import ProdutoDetalhes from './pages/ProdutoDetalhes';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from './components/ScrollToTop';
+import Checkout from './pages/Checkout';
 
 function App() {
   return ( 
@@ -64,6 +65,15 @@ function App() {
             element={
               <RotaProtegida>
                 <MeuCarrinho />
+              </RotaProtegida>
+            }
+          />
+
+            <Route 
+            path="/comprar" 
+            element={
+              <RotaProtegida>
+                <Checkout />
               </RotaProtegida>
             }
           />

@@ -1,64 +1,67 @@
 import { useEffect, useState } from 'react'
 import Container from '../components/Container'
 import styles from './MeuCarrinho.module.css'
+import { Link } from 'react-router-dom'
 
 export default function MeuCarrinho() {
   const [produtos, setProdutos] = useState([])
   const [cep, setCep] = useState('')
+  const [logradouro, setLogradouro] = useState("")
+  const [uf, setUf] = useState("")
+  const [localidade, setLocalidade] = useState("'")
   const [frete, setFrete] = useState(null)
   const [erroCep, setErroCep] = useState(null)
 
-  // Carrega o carrinho do localStorage ao abrir a página
+
+
+   // Carrega o carrinho do localStorage ao abrir a página
   useEffect(() => {
-    const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho')) || []
-
-    // Se não tiver quantidade, define como 1
-    const carrinhoComQuantidade = carrinhoSalvo.map((p) =>
-      p.quantidade ? p : { ...p, quantidade: 1 }
-    )
-
-    setProdutos(carrinhoComQuantidade)
+      const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho')) || []
+      setProdutos(carrinhoSalvo)
+      console.log("PRODUTOS", produtos)
   }, [])
 
-  // Atualiza estado e localStorage ao modificar o carrinho
-  const atualizarCarrinho = (novoCarrinho) => {
-    setProdutos(novoCarrinho)
-    localStorage.setItem('carrinho', JSON.stringify(novoCarrinho))
-  }
+  useEffect(() => {   
+  console.log("PRODUTOS ATUALIZADOS APÓS EFEITO COLATERAL:", produtos)
+}, [produtos])
 
-  // Aumenta a quantidade do produto
-  const adicionar = (id) => {
-    const atualizado = produtos.map((p) =>
-      p.id_do_produto === id ? { ...p, quantidade: p.quantidade + 1 } : p
+
+//Adicionar ao carrinho
+const adicionar = (id) => {
+  const atualizado = produtos.map((p) =>
+    p.id_do_produto === id ? { ...p, quantidade: p.quantidade + 1 } : p
+  )
+  setProdutos(atualizado)
+}
+
+//incrementar produto
+const remover = (id) => {
+  const atualizado = produtos
+    .map((p) =>
+      p.id_do_produto === id
+        ? { ...p, quantidade: p.quantidade - 1 }
+        : p
     )
-    atualizarCarrinho(atualizado)
-  }
+    .filter((p) => p.quantidade > 0)
+    setProdutos(atualizado)
+}
 
-  // Diminui a quantidade do produto
-  const remover = (id) => {
-    const atualizado = produtos
-      .map((p) =>
-        p.id_do_produto === id
-          ? { ...p, quantidade: p.quantidade - 1 }
-          : p
-      )
-      .filter((p) => p.quantidade > 0) // remove se a quantidade ficar 0
-    atualizarCarrinho(atualizado)
-  }
+// Calcula o subtotal dos produtos no carrinho.
+// Para cada produto, multiplica o valor unitário pela quantidade e soma ao total.
+// O valor_do_produto vem como string, por isso usamos parseFloat para converter em número.
+const calcularSubtotal = () => {
+  return produtos.reduce(
+    (total, p) => total + parseFloat(p.valor_do_produto) * p.quantidade,
+    0 // valor inicial da soma
+  )
+}
 
-  // Soma o valor total dos produtos com base na quantidade
-  const calcularSubtotal = () => {
-    return produtos.reduce(
-      (total, p) => total + parseFloat(p.valor_do_produto) * p.quantidade,
-      0
-    )
-  }
-
-  const calcularTotal = () => {
-    const subtotal = calcularSubtotal()
-    return frete ? (subtotal + frete).toFixed(2) : subtotal.toFixed(2)
-  }
-
+//calcular total
+const calcularTotal = () => {
+  const subtotal = calcularSubtotal()
+  return frete ? (subtotal + frete).toFixed(2) : subtotal.toFixed(2)
+}
+  
   const calcularFrete = async () => {
     if (cep.length !== 8) {
       setErroCep('Digite um CEP válido com 8 números.')
@@ -78,6 +81,9 @@ export default function MeuCarrinho() {
 
       setErroCep(null)
 
+      setUf(data.uf)
+      setLocalidade(data.localidade)
+      setLogradouro(data.logradouro)
       let valorFrete = 0
       if (data.uf === 'SP') valorFrete = 10.90
       else if (data.uf === 'RJ') valorFrete = 14.50
@@ -89,6 +95,8 @@ export default function MeuCarrinho() {
       setFrete(null)
     }
   }
+
+ 
 
   return (
     <Container>
@@ -129,12 +137,20 @@ export default function MeuCarrinho() {
               />
               <button onClick={calcularFrete}>Calcular</button>
               {erroCep && <p className={styles.erro}>{erroCep}</p>}
-              {frete !== null && <p className={styles.valorFrete}>Frete: R$ {frete.toFixed(2)}</p>}
+              {frete !== null && 
+                <div>
+                  <p>{localidade} - {uf}</p>
+                  <p>{logradouro}</p>
+                  <p className={styles.valorFrete}>Frete: R$ {frete.toFixed(2)}</p>
+                </div>
+              }
+              
             </div>
 
             <div className={styles.total}>
               <p><strong>Subtotal:</strong> R$ {calcularSubtotal().toFixed(2)}</p>
-              <p><strong>Total:</strong> R$ {calcularTotal()}</p>
+              <p style={{marginBottom: "20px"}}><strong>Total:</strong> R$ {calcularTotal()}</p>
+              <Link to="/comprar" className={styles.btn_comprar}>Comprar</Link>
             </div>
           </>
         )}

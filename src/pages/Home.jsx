@@ -136,8 +136,8 @@ export default function Home() {
       <section className={styles.about}>
         <h2>Sobre a Elaine’s Charm</h2>
         <p>
-          A Elaine’s Charm nasceu do amor pelos cuid_do_produtoados com a pele e a autoestima. 
-          Oferecemos cosméticos de alta qualid_do_produtoade, cruelty-free e com preços justos.
+          A Elaine’s Charm nasceu do amor pelos cuidados com a pele e a autoestima. 
+          Oferecemos cosméticos de alta qualidade, cruelty-free e com preços justos.
         </p>
       </section>
 
@@ -161,13 +161,13 @@ export default function Home() {
           alt="Produto Cruelty-Free"
           className={styles.crueltyIcon}
         />
-        <p>Produtos livres de crueldade animal. Amor à beleza e à vid_do_produtoa. 🐇</p>
+        <p>Produtos livres de crueldade animal. Amor à beleza e à vida. 🐇</p>
       </section>
 
       {/* Chamada para criar conta */}
       <section className={styles.cta}>
         <h2>💌 Quer ofertas exclusivas?</h2>
-        <p>Crie sua conta grátis e receba novid_do_produtoades direto no seu e-mail</p>
+        <p>Crie sua conta grátis e receba novidades direto no seu e-mail</p>
         <div className={styles.ctaButtons}>
           <Link to="/criarConta" className={styles.btnPrimary}>Criar Conta</Link>
           <Link to="/entrar" className={styles.btnSecondary}>Entrar</Link>

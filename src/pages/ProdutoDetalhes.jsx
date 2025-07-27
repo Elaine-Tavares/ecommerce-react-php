@@ -13,7 +13,7 @@ export default function ProdutoDetalhes() {
    // Estado que vai guardar os dados do produto buscado
   const [loading, setLoading] = useState(false)
   const [produto, setProduto] = useState([])
-  const [carrinho, setCarrinho] = useState([])
+  const [carrinhoFinal, setCarrinhoFinal] = useState([])
   const navigate = useNavigate()
 
     const produtoDetalhes = async () => {   
@@ -55,9 +55,10 @@ export default function ProdutoDetalhes() {
   
 
   function addProdutoCarrinho(novoProduto) {
-  console.log("novo produto:", novoProduto)
+  console.log("NOVO PRODUTO:", novoProduto)
+
   const carrinhoAtual = JSON.parse(localStorage.getItem('carrinho')) || []
-  console.log('carrinho atual:', carrinhoAtual)
+  console.log('CARRINHO ATUAL:', carrinhoAtual)
 
    // Verifica se o produto já está no carrinho pelo ID
   const produtoJaExiste = carrinhoAtual.some(p => p.id_do_produto === novoProduto.id_do_produto)
@@ -73,14 +74,14 @@ export default function ProdutoDetalhes() {
     return
   }
  // Se não existir, adiciona e salva
-  const novoCarrinho = [...carrinhoAtual, novoProduto]
-  console.log("novoCarrinho: ", novoCarrinho)
+  const novoCarrinho = [...carrinhoAtual, {...novoProduto, quantidade: 1}]
+  console.log("NOVOCARRINHO: ", novoCarrinho)
 
   localStorage.setItem('carrinho', JSON.stringify(novoCarrinho))
-  console.log("localStorage", localStorage)
+  console.log("LOCALSTORAGE", localStorage)
 
-  setCarrinho(novoCarrinho)
-  console.log("carrinho", carrinho)
+  setCarrinhoFinal(novoCarrinho)
+  console.log("CARRINHO", carrinhoFinal)
 
    toast.success('Produto adicionado com sucesso! 🛍️', {
     // icon: '🛍️',

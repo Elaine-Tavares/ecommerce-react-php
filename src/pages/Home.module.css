@@ -144,6 +144,8 @@
 .crueltyFreeSection {
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 12px;
   background-color: #fff0f5;
   padding: 16px 24px;

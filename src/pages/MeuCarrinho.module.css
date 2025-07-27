@@ -1,7 +1,7 @@
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 4rem 2rem 4rem 2rem;
   min-height: 320px;
 }
 
@@ -84,15 +84,17 @@
   padding: 0.6rem 1.2rem;
   border: none;
   background-color: #e6007e;
+  opacity: 0.8;
+  font-size: 14px;
   color: white;
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.5s ease;
 }
 
 .frete button:hover {
-  background-color: #c50066;
+  opacity: 1;
 }
 
 .valorFrete {
@@ -120,6 +122,25 @@
 
 .total strong {
   color: #000;
+}
+
+.btn_comprar{
+  background-color: green;
+  opacity: 0.8;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  font-size: 14px;
+}
+
+.btn_comprar:hover{
+  opacity: 1;
+  
 }
 
 /* Responsividade */
