@@ -30,6 +30,7 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    gap: 10px;
 }
 
 .logo {
@@ -54,6 +55,7 @@ h3{
 /* Container dos links */
 .nav_links {
   display: flex;
+  align-items: center;
   gap: 50px;
   transition: 0.3s;
 }
@@ -68,11 +70,15 @@ h3{
 .link_criarConta {
   font-weight: 500;
   color: #333;
+  opacity: 0.8;
   text-decoration: none;
   transition: 0.3s ease;
-  font-size: 1rem;
+  font-size: 17px;
   font-weight: bold;
   border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .link_home:hover,
@@ -110,7 +116,6 @@ h3{
 @media (max-width: 868px){
    .navbar {
     padding-inline: 1rem;
-    /* border: 2px solid blue; */
 }
 
 .container_logo{
@@ -141,7 +146,7 @@ h3{
     text-align: end;
     cursor: pointer;
     align-self: start;
-    font-size: 30px;
+    font-size: 18px;
 }
 
   .overlay{
@@ -163,12 +168,15 @@ h3{
     height: 100%;
     right: 0;
     flex-flow: column;
+    align-items: start;
     padding: 2rem 2rem;
-    text-align: start;
+    text-align: end;
     background-color:#c9a0f5; 
+    box-shadow: 5px 5px 30px #c9a0f5; 
     transition: .5s ease;
     overflow-y: auto; /* permite rolar se faltar espaço */
     z-index: 999; /* para garantir que fique por cima */
+    border-radius: 30px 0px 0px 30px;
   }
 
   .link_entrar {
@@ -184,12 +192,12 @@ h3{
 
 
 @media (max-width: 738px) {
-    /* .navbar {
-    border: 2px solid red;
-} */
+    .navbar {
+ 
+}
 
 .mobile_close{
-    align-self: center; 
+    align-self: start; 
 }
   .nav_links {
     position: fixed;
@@ -202,8 +210,9 @@ h3{
     text-align: center;
     background-color:#c9a0f5; 
     transition: .5s ease;
-    gap: 80px;
+    gap: 90px;
     z-index: 999;
+    font-size: 18px;
   }
 
   .container_logo{
@@ -220,9 +229,4 @@ h3{
 }
 }
 
-/* 
-@media (max-width: 568px) {
-  h3{
 
-  }
-} */

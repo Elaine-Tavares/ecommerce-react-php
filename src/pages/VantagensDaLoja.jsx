@@ -6,6 +6,7 @@ import selo from    '../assets/selo.webp'
 import { Link } from 'react-router-dom'
 import api from '../services/api'
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 
 
 export default function VantagensDaLoja() {
@@ -49,14 +50,22 @@ export default function VantagensDaLoja() {
     }, [] )
 
   return (
-    <div>
+    <section>
       <Container>
+        <Helmet>
+          <title>Vantagens da Elaine's Charm | Maquiagem e Cosméticos de Qualidade</title>
+          <meta
+            name="description"
+            content="Conheça as vantagens exclusivas da Elaine's Charm: produtos de alta qualidade, atendimento personalizado, entregas rápidas e segurança nas suas compras."
+          />
+          <meta name="robots" content="index, follow" />
+        </Helmet>
         <SearchBar
           inputDoUsuario={valorDoUsuario}
           setInputDoUsuario={(e) => setValorDoUsuario(e.target.value)}
         />
         {carregando && <div className='loader'></div>}
-       
+
              {valorDoUsuario && (
                    <div className={styles.produtosContainer}>
                      <h1 className={styles.titulo}>Nossos Produtos</h1>
@@ -120,6 +129,6 @@ export default function VantagensDaLoja() {
         </div>
       </div>
       </Container>
-    </div>
+    </section>
   )
 }

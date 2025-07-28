@@ -6,7 +6,7 @@
   justify-content: space-around;
   align-items: center;
   flex-flow: wrap;
-  gap: 30px;
+  gap: 25px;
 }
 
 .titulo {
@@ -74,4 +74,14 @@
 
 .botaoComprar:hover {
   background-color: #c2185b;
+}
+
+@media(max-width: 480px){
+  .produtosContainer{
+    gap: 10px;
+  }
+
+  .cardProduto{
+    width: 170px;
+  }
 }

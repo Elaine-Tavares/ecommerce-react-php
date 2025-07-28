@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import { Helmet } from "react-helmet"
 import styles from './PoliticaDePrivacidade.module.css'
 
 export default function Privacidade() {
@@ -10,7 +11,15 @@ export default function Privacidade() {
     3 - Em seguida: as funções internas
     4 - Por fim: o retorno do JSX*/
   return (
-    <div>
+    <section>
+        <Helmet>
+          <title>Política de Privacidade | Elaine's Charm</title>
+          <meta
+            name="description"
+            content="Saiba como a Elaine's Charm protege seus dados pessoais e respeita sua privacidade em todas as compras e interações."
+          />
+          <meta name="robots" content="index, follow" />
+        </Helmet>
         <Header/>
             <div className={styles.container}>
       <h1>Política de Privacidade</h1>
@@ -45,6 +54,6 @@ export default function Privacidade() {
       <Link to="/">Voltar à página inicial</Link>
     </div>
         <Footer/>
-    </div>
+    </section >
   )
 }

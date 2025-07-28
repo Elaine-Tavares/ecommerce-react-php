@@ -1,8 +1,9 @@
-import styles from './CriarConta.module.css'
 import logo from '../../src/assets/logo.webp'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import api from '../services/api'
+import { Helmet } from 'react-helmet'
+import styles from './CriarConta.module.css'
 
 
 export default function CriarConta() {
@@ -82,7 +83,12 @@ export default function CriarConta() {
   }
 
   return (
-    <div>
+    <section>
+      <Helmet>
+        <title>Criar conta | Elaine's Charm</title>
+        <meta name="description" content="Crie sua conta gratuita na Elaine's Charm e aproveite ofertas exclusivas em maquiagem e cosméticos." />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <div className={styles.navbar}>
       <Link className={styles.container_logo} to="/">
           <img className={styles.logo} src={logo} alt="Logo do site" />
@@ -140,7 +146,6 @@ export default function CriarConta() {
           value={repeteSenha} onChange={e => setRepeteSenha(e.target.value)}
          />
         </div>
-
         <div className={styles.div_form_check}>
           <label>
             <input
@@ -156,8 +161,6 @@ export default function CriarConta() {
         <div className={styles.div_form}>
         <input type="submit" value="Criar" />
        </div>
-
-
     </form> 
     <div style={{ textAlign: 'center', marginTop: '20px' }}>
       <p>Já tem uma conta?</p>
@@ -166,7 +169,6 @@ export default function CriarConta() {
       </button>
     </div> 
   </div>
-</div>
-    
+</section>   
   )
 }

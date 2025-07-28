@@ -1,10 +1,10 @@
 import Container from '../components/Container'
-import styles from  './Produtos.module.css'
-
 import api from '../services/api'
 import { useEffect, useState } from 'react'
 import SearchBar from '../components/SearchBar'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
+import styles from  './Produtos.module.css'
 
 export default function Produtos() {
   /*Ao ler um componente, um desenvolvedor espera encontrar:
@@ -47,10 +47,17 @@ export default function Produtos() {
          img.nome_do_produto.toLowerCase().includes(valorDoUsuario.toLowerCase())    
       )
 
-      
-
+    
   return (
       <Container >
+        <Helmet>
+          <title>Produtos | Elaine's Charm - Maquiagem e Cosméticos</title>
+          <meta
+            name="description"
+            content="Explore nossa variedade de maquiagem e cosméticos de alta qualidade na Elaine's Charm. Encontre os melhores produtos para realçar sua beleza!"
+          />
+          <meta name="robots" content="index, follow" />
+        </Helmet>
         <SearchBar
           inputDoUsuario={valorDoUsuario}
           setInputDoUsuario={(e) => setValorDoUsuario(e.target.value)}   

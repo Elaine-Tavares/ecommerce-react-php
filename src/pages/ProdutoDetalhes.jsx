@@ -1,11 +1,11 @@
 // Importa o hook que permite acessar os parâmetros da URL (ex: o ID do produto)
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-
+// import { Helmet } from 'react-helmet'
 import Container from '../components/Container'
 import { toast } from 'react-toastify' // ✅ IMPORTAR AQUI
-import styles from './ProdutoDetalhes.module.css'
 import api from '../services/api.js'
+import styles from './ProdutoDetalhes.module.css'
 
 export default function ProdutoDetalhes() {
   // Obtém o ID do produto que está vindo da URL (ex: /produto/7)
@@ -94,10 +94,20 @@ export default function ProdutoDetalhes() {
   // console.log("Carrinho com novo produto:", carrinho)
 }
 
-
-
   return (
     <Container>
+      {/* <Helmet>
+        <title>{produto.nome_do_produto} | Elaine's Charm</title>
+        <meta
+          name="description"
+          content={produto.descricao_do_produto || "Compre maquiagem e cosméticos de qualidade na Elaine's Charm."}
+        />
+        <meta property="og:title" content={`${produto.nome_do_produto} | Elaine's Charm`} />
+        <meta property="og:description" content={produto.descricao_do_produto || "Compre maquiagem e cosméticos de qualidade na Elaine's Charm."} />
+        <meta property="og:image" content={produto.imagem_do_produto} />
+        <meta property="og:url" content={`https://www.elainescharm.com/produto/${produto.id}`} />
+        <meta name="robots" content="index, follow" />
+      </Helmet> */}
       {loading}
       <div className={styles.container}>
         <div className={styles.imagens}>
@@ -109,8 +119,10 @@ export default function ProdutoDetalhes() {
           <h4>{produto.descricao_do_produto}</h4>
           <span className={styles.valor_do_produto}>R$ {produto.valor_do_produto}</span> ou
           <span className={styles.valor_do_produto}>R$ {produto.parcelamento_do_produto}</span>
-          <button onClick={()=>addProdutoCarrinho(produto)} className={styles.botaoAddCarrinho}>Adicionar ao Carrinho</button>
-          <button onClick={()=>navigate('/meuCarrinho')} className={styles.botaoIrCarrinho}>Ir para o Carrinho</button>
+          <div className={styles.container_buttons}>
+             <button onClick={()=>addProdutoCarrinho(produto)} className={styles.botaoAddCarrinho}>Adicionar ao Carrinho</button>
+             <button onClick={()=>navigate('/meuCarrinho')} className={styles.botaoIrCarrinho}>Ir para o Carrinho</button>
+          </div>   
         </div>
       </div>
     </Container>

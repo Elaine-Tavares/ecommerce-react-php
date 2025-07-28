@@ -1,8 +1,9 @@
-import styles from './Entrar.module.css'
 import logo from '../assets/logo.webp'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import api from '../services/api'
 import { useState } from 'react'
+import { Helmet } from 'react-helmet'
+import styles from './Entrar.module.css'
 
 
 export default function Entrar() {
@@ -64,19 +65,21 @@ export default function Entrar() {
   }
  
   return (
-    <div>
+    <section>
+      <Helmet>
+        <title>Entrar | Elaine's Charm</title>
+        <meta name="description" content="Acesse sua conta na Elaine's Charm e acompanhe seus pedidos de maquiagem e cosméticos com facilidade." />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <div className={styles.navbar}>
        <Link className={styles.container_logo} to="/">
          <img className={styles.logo} src={logo} alt="Logo do site" />
          <h3>Beleza que revela o seu charme</h3>
        </Link>
       </div>
-      <div className={styles.form_entrar_conta}>
-       
-        <h2>Preencha os dados para logar</h2>
-        
-         {mensagemErr && <p className={styles.mensagemErr}>{mensagemErr}</p> }
-
+      <div className={styles.form_entrar_conta}> 
+        <h2>Preencha os dados para logar</h2>  
+        {mensagemErr && <p className={styles.mensagemErr}>{mensagemErr}</p> }
         <form onSubmit={handleLogar}>
          <div className={styles.div_form}>
           <label>Informe seu e-mail</label>
@@ -101,12 +104,12 @@ export default function Entrar() {
          </div>
         </form> 
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <p>Não tem uma conta?</p>
-              <button className={styles.botaoCriarContaSecundario} onClick={() => navigate('/criarConta')}>
-              Criar Conta
-              </button>
-          </div>  
+            <p>Não tem uma conta?</p>
+            <button className={styles.botaoCriarContaSecundario} onClick={() => navigate('/criarConta')}>
+            Criar Conta
+            </button>
+        </div>  
       </div>
-    </div>
+    </section>
   )
 }

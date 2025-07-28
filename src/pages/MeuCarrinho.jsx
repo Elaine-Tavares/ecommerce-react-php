@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import Container from '../components/Container'
-import styles from './MeuCarrinho.module.css'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
+import styles from './MeuCarrinho.module.css'
 
 export default function MeuCarrinho() {
   const [produtos, setProdutos] = useState([])
@@ -11,8 +12,6 @@ export default function MeuCarrinho() {
   const [localidade, setLocalidade] = useState("'")
   const [frete, setFrete] = useState(null)
   const [erroCep, setErroCep] = useState(null)
-
-
 
    // Carrega o carrinho do localStorage ao abrir a página
   useEffect(() => {
@@ -100,6 +99,15 @@ const calcularTotal = () => {
 
   return (
     <Container>
+      <Helmet>
+  <title>Meu Carrinho | Elaine's Charm</title>
+  <meta
+    name="description"
+    content="Veja os produtos de maquiagem e cosméticos que você adicionou ao carrinho. Revise seus itens antes de finalizar sua compra na Elaine's Charm."
+  />
+  <meta name="robots" content="noindex, nofollow" />
+</Helmet>
+
       <div className={styles.container}>
         <h1>Meu Carrinho</h1>
 

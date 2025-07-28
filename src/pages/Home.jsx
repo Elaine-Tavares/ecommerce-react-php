@@ -4,9 +4,9 @@ import HeroCarousel from '../components/HeroCarousel'
 import selo from '../assets/selo.webp'
 import SearchBar from '../components/SearchBar'
 import { useEffect, useState } from 'react'
-import styles from './Home.module.css'
 import api from '../services/api.js'
-
+import { Helmet } from 'react-helmet'
+import styles from './Home.module.css'
 
 
 export default function Home() {
@@ -15,7 +15,6 @@ export default function Home() {
     2 - Depois: os efeitos colaterais (useEffect)
     3 - Em seguid_do_produtoa: as funções internas
     4 - Por fim: o retorno do JSX*/
- 
     const [imgs, setImgs] = useState([])
     const [valorDoUsuario, setValorDoUsuario] = useState("")
     const [ativado, setAtivado] = useState(false)
@@ -23,8 +22,7 @@ export default function Home() {
     const location = useLocation()
     const navigate = useNavigate()
 
-
-      useEffect(() => {
+    useEffect(() => {
       const params = new URLSearchParams(location.search)
           console.log("PARAMS", params)
       if (params.get('sucesso') === '1') {
@@ -69,19 +67,25 @@ export default function Home() {
   
   return (
     <Container>
+      <Helmet>
+        <title>Elaine's Charm | Maquiagem e cosméticos para realçar sua beleza</title>
+        <meta
+          name="description"
+          content="Conheça a Elaine's Charm, sua loja online de maquiagem e cosméticos. Produtos de qualidade para destacar sua beleza com estilo, cuidado e autenticidade."
+        />
+      </Helmet>
               {ativado && (
-  <div className={styles.mensagemAtivacao}>
-    <p >{mensagem}</p>
-    <button className={styles.botaoLogar} onClick={() => navigate('/entrar')}>
-      Logar
-    </button>
-  </div>
-)}
+      <div className={styles.mensagemAtivacao}>
+        <p >{mensagem}</p>
+        <button className={styles.botaoLogar} onClick={() => navigate('/entrar')}>
+          Logar
+        </button>
+      </div>
+    )}
     <SearchBar
       inputDoUsuario={valorDoUsuario}
       setInputDoUsuario={(e) => setValorDoUsuario(e.target.value)}
-    />
-    
+    />  
     {valorDoUsuario && (
       <div className={styles.produtosContainer}>
         <h1 className={styles.titulo}>Nossos Produtos</h1>
@@ -89,21 +93,21 @@ export default function Home() {
             <p className={styles.semResultados}>Nenhum produto encontrado com esse nome 😢</p>
         )}
         {produtosFiltrados.map((produto) => (
-        <div
+          <div
             key={produto.id_do_produto}
             name={produto.categoria_do_produto}
             className={styles.cardProduto}
           >
-          <img src={produto.imagem_do_produto} alt="Produto" />
-          <h2>{produto.nome_do_produto}</h2>
-          <p className={styles.preco}>
-            R$ {Number(produto.valor_do_produto).toFixed(2)}
-          </p>
-          <p className={styles.preco}>{produto.parcelamento_do_produto}</p>
-          <Link  to={`/produto_detalhes/${produto.id_do_produto}`} className={styles.cardLink}> <button className={styles.botaoVer}>Ver Produto</button></Link>
+            <img src={produto.imagem_do_produto} alt="Produto" />
+            <h2>{produto.nome_do_produto}</h2>
+            <p className={styles.preco}>
+              R$ {Number(produto.valor_do_produto).toFixed(2)}
+            </p>
+            <p className={styles.preco}>{produto.parcelamento_do_produto}</p>
+            <Link  to={`/produto_detalhes/${produto.id_do_produto}`} className={styles.cardLink}> <button className={styles.botaoVer}>Ver Produto</button></Link>
         </div>
     ))}
-  </div>
+     </div>
 )}
 
     <div className={styles.homeContainer}>
@@ -174,6 +178,6 @@ export default function Home() {
         </div>
       </section>
     </div>
-    </Container>
+  </Container>
   )
 }

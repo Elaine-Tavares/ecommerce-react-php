@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
-import styles from './TermosDeUso.module.css'
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import { Helmet } from "react-helmet"
+import styles from './TermosDeUso.module.css'
 
 export default function TermosDeUso() {
   /*Ao ler um componente, um desenvolvedor espera encontrar:
@@ -10,8 +11,17 @@ export default function TermosDeUso() {
     3 - Em seguida: as funções internas
     4 - Por fim: o retorno do JSX*/
   return (
-   <div>
+   <section>
       <Header/>
+        <Helmet>
+        <title>Termos de Uso | Elaine's Charm</title>
+        <meta
+          name="description"
+          content="Confira os termos e condições para utilização da loja Elaine's Charm, incluindo direitos, deveres e responsabilidades dos usuários."
+        />
+        <meta name="robots" content="index, follow" />
+     </Helmet>
+
       <div className={styles.container}>
       <h1>Termos de Uso</h1>
       <p>Última atualização: 09/07/2025</p>
@@ -39,7 +49,7 @@ export default function TermosDeUso() {
       <Link to="/">Voltar à página inicial</Link>
     </div>
     <Footer/>
-  </div>
+  </section>
 
     
   )

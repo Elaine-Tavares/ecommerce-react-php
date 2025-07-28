@@ -10,7 +10,8 @@
 }
 
 .heroText h1 {
-  font-size: 2.5rem;
+  font-family: "Satisfy", cursive !important;
+  font-size: 2rem;
   color: #3c003c;
 }
 
