@@ -49,8 +49,11 @@
     <!--necessário para conexões com servidores de terceiros (como fonts.gstatic.com), permitindo que os recursos carreguem corretamente e com caching compartilhado-->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!--Fonte-->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Satisfy&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Satisfy&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Satisfy&display=swap" rel="stylesheet">
+    </noscript>
   </head>
 
   <body>
